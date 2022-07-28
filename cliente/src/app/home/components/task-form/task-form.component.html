@@ -1,76 +1,50 @@
-<ion-item class="input">
-  <ion-label position="floating">Titulo</ion-label>
-  <ion-input [value]="task.title" (ionChange)="setTitle($event)"></ion-input>
-</ion-item>
+<div class="container">
+  <ion-item class="input">
+    <ion-label position="floating">Titulo</ion-label>
+    <ion-input [value]="task.title" (ionChange)="setTitle($event)"></ion-input>
+  </ion-item>
 
-<ion-item class="input">
-  <ion-label position="floating">Subtitulo</ion-label>
-  <ion-input
-    [value]="task.subtitle"
-    (ionChange)="setSubtitle($event)"
-  ></ion-input>
-</ion-item>
+  <ion-item class="input">
+    <ion-label position="floating">Subtitulo</ion-label>
+    <ion-input
+      [value]="task.subtitle"
+      (ionChange)="setSubtitle($event)"
+    ></ion-input>
+  </ion-item>
 
-<ion-chip outline color="white" id="datepicker-trigger" class="date-chip">
-  <ion-icon name="calendar-number-outline" color="white"></ion-icon>
-  <ion-label>{{ task.deadline }}</ion-label>
-</ion-chip>
+  <ion-chip outline color="white" id="datepicker-trigger" class="date-chip">
+    <ion-icon name="calendar-number-outline" color="white"></ion-icon>
+    <ion-label>{{ task.deadline }}</ion-label>
+  </ion-chip>
 
-<ion-popover trigger="datepicker-trigger" trigger-action="click">
-  <ng-template>
-    <div class="centered">
-      <ion-datetime
-        [value]="task.deadline"
-        [min]="today"
-        (ionChange)="setDate($event)"
-        presentation="date"
-      >
-      </ion-datetime>
+  <div class="pickers">
+    <div class="left">
+      <app-priority-picker
+        [priority]="task.priority"
+        (onPriorityChange)="setPriority($event)"
+      ></app-priority-picker>
     </div>
-  </ng-template>
-</ion-popover>
 
-<ion-list>
-  <ion-radio-group [value]="task.priority" (ionChange)="setPriority($event)">
-    <ion-item>
-      <ion-label>Muy Importante</ion-label>
-      <ion-radio color="danger" slot="start" value="Muy Importante"></ion-radio>
-    </ion-item>
+    <div class="right">
+      <app-category-picker
+        [category]="task.category"
+        (onCategoryChange)="setCategory($event)"
+      ></app-category-picker>
+    </div>
+  </div>
 
-    <ion-item>
-      <ion-label>Importante</ion-label>
-      <ion-radio slot="start" value="Importante"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Poco importante</ion-label>
-      <ion-radio slot="start" value="Poco Importante"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-
-<ion-list>
-  <ion-radio-group [value]="task.category" (ionChange)="setCategory($event)">
-    <ion-item>
-      <ion-label>Hogar</ion-label>
-      <ion-radio slot="start" value="Hogar"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Trabajo</ion-label>
-      <ion-radio slot="start" value="Trabajo"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Educacion</ion-label>
-      <ion-radio slot="start" value="Educacion"></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Otros</ion-label>
-      <ion-radio slot="start" value="Otros"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-
-<ion-button (click)="save()">Guardar</ion-button>
+  <ion-button (click)="save()" expand="block">Guardar</ion-button>
+  <ion-popover trigger="datepicker-trigger" trigger-action="click">
+    <ng-template>
+      <div class="centered">
+        <ion-datetime
+          [value]="task.deadline"
+          [min]="today"
+          (ionChange)="setDate($event)"
+          presentation="date"
+        >
+        </ion-datetime>
+      </div>
+    </ng-template>
+  </ion-popover>
+</div>

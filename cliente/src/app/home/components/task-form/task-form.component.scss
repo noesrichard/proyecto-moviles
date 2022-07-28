@@ -15,28 +15,23 @@
   border-radius: 20px;
 }
 
-.radio-group {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-radius: 20px;
-}
 
-.right{ 
-  margin-left: 25px; 
-  margin-right: 10px; 
+.pickers {
+  margin-top: 20px; 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .left{ 
-  margin-left: 10px; 
-  margin-right: 25px; 
+  margin-left: 28px; 
+  background-color: #121212; 
+  margin-right: 5px; 
 }
 
-.priority-item {
-  margin: 0;
-  padding: 0;
+.right{ 
+  margin-right: 28px; 
 }
 
-.radios {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+ion-button{ 
+  margin: 28px; 
 }

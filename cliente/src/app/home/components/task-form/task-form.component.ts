@@ -20,12 +20,15 @@ export class TaskFormComponent implements OnInit {
   };
 
   private today: string = '2022-01-01';
+  private dateString: string = ""
 
   constructor(private service: TaskService, private router: Router) {}
 
   ngOnInit() {
     if (!this.task.id) {
       this.today = new Date().toISOString().split('T')[0];
+      const hoy = new Date(); 
+      const options = { year: 'numeric', month: 'long', day: 'numeric' }
       this.task.deadline = this.today;
       const userId = parseInt(localStorage.getItem('userId'));
       const username = localStorage.getItem('username');
@@ -58,7 +61,7 @@ export class TaskFormComponent implements OnInit {
     this.task.category = event.detail.value;
   }
 
-  setPriority(event: CustomEvent) {
+  setPriority(event: any) {
     this.task.priority = event.detail.value;
   }
 }
