@@ -23,4 +23,9 @@ export class AuthService {
     const url = this.BASE_API_URL + '/login';
     return this.client.get(url, options)
   }
+
+  register(user: User): Observable<any>{ 
+    const url = this.BASE_API_URL + '/signup'; 
+    return this.client.post(url,user); 
+  }
 }

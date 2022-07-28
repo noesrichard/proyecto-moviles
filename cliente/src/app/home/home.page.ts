@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 import { Task, TaskService } from '../services/task/task.service';
 
 @Component({
@@ -10,7 +11,8 @@ export class HomePage {
   private tasks: Task[];
   private date: string; 
 
-  constructor(private service: TaskService) {}
+  constructor(private service: TaskService, 
+             private router: Router) {}
 
   ngOnInit() {
     this.getTasks();

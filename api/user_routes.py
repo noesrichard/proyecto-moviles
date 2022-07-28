@@ -17,7 +17,7 @@ def signup():
    user = User.query.filter_by(username=username).first()
 
    if user is not None:
-      return make_response('username alredy picked', 500)
+      return make_response('username alredy picked', 400)
 
    new_user = User(username=username, password=password)
 
@@ -33,6 +33,8 @@ def login():
       return no_authorized()
 
    user = User.query.filter_by(username=auth.username).first()
+   if not user: 
+      return no_authorized(); 
 
    if user.password == auth.password:
       exp = datetime.datetime.utcnow() + datetime.timedelta(hours=24)

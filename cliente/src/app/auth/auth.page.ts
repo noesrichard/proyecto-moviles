@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../services/auth/auth.service";
-import {Router} from "@angular/router";
+import { AuthService, User } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-auth',
@@ -8,17 +9,49 @@ import {Router} from "@angular/router";
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-  constructor(private auth: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  private user: User = { 
+    username: "",
+    password: "",
+  }
 
-  signin(username: string, password: string) {
-    const user = { username: username, password: password };
-    this.auth.signin(user).subscribe(res => {
-      localStorage.setItem("jwt", res.token)
-      localStorage.setItem("userId", res.userId)
-      localStorage.setItem("username", res.username)
-      this.router.navigate(["tasks"])
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toast: ToastController
+  ) {}
+
+  ngOnInit() {
+    localStorage.clear();
+  }
+
+  signin() {
+    console.log(this.user)
+    this.auth.signin(this.user).subscribe(
+      (res) => {
+        localStorage.setItem('jwt', res.token);
+        localStorage.setItem('userId', res.userId);
+        localStorage.setItem('username', res.username);
+        this.router.navigate(['tasks']);
+      },
+      (error) => {
+        this.presentToast('Usuario o contraseña incorrectos');
+      }
+    );
+  }
+
+  async presentToast(msg: string) {
+    const toast = await this.toast.create({
+      message: msg,
+      position: 'bottom',
+      duration: 2000,
     });
+    await toast.present();
+  }
+
+  ionViewDidEnter() {
+    this.user.username = ""
+    this.user.password = ""
+    localStorage.clear();
   }
 }

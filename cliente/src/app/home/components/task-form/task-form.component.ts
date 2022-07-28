@@ -54,6 +54,7 @@ export class TaskFormComponent implements OnInit {
     });
     this.router.navigate(['tasks']);
   }
+
   async presentToast(msg:string) {
     const toast = await this.toast.create({
       message: msg,

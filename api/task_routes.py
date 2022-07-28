@@ -31,8 +31,11 @@ def create_task(current_user):
 @tasks_blueprint.route("/api/tasks", methods=["GET"])
 @token_required
 def list_tasks(current_user):
-   tasks = Task.query.join(Task.workers).filter_by(user_id=current_user.id).all()
-   tasks += Task.query.filter_by(owner=current_user.id).join(Task.workers).all()
+
+   print(current_user.id)
+
+   tasks = Task.query.filter_by(owner=current_user.id).join(Task.workers).all()
+
    if len(tasks) == 0:
       return no_content()
 
