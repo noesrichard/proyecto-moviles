@@ -1,13 +1,9 @@
-<ion-item
-    class="input"
-  >
+<ion-item class="input">
   <ion-label position="floating">Titulo</ion-label>
-  <ion-input [value]="task.title" (ionChange)="setTitle($event)" ></ion-input>
+  <ion-input [value]="task.title" (ionChange)="setTitle($event)"></ion-input>
 </ion-item>
 
-<ion-item 
-  class="input"
-  >
+<ion-item class="input">
   <ion-label position="floating">Subtitulo</ion-label>
   <ion-input
     [value]="task.subtitle"
@@ -15,19 +11,27 @@
   ></ion-input>
 </ion-item>
 
-<div class="centered">
-  <ion-datetime
-    [value]="task.deadline"
-    [min]="today"
-    (ionChange)="setDate($event)"
-    presentation="date"
-  >
-  </ion-datetime>
-</div>
+<ion-chip outline color="white" id="datepicker-trigger" class="date-chip">
+  <ion-icon name="calendar-number-outline" color="white"></ion-icon>
+  <ion-label>{{ task.deadline }}</ion-label>
+</ion-chip>
+
+<ion-popover trigger="datepicker-trigger" trigger-action="click">
+  <ng-template>
+    <div class="centered">
+      <ion-datetime
+        [value]="task.deadline"
+        [min]="today"
+        (ionChange)="setDate($event)"
+        presentation="date"
+      >
+      </ion-datetime>
+    </div>
+  </ng-template>
+</ion-popover>
 
 <ion-list>
   <ion-radio-group [value]="task.priority" (ionChange)="setPriority($event)">
-
     <ion-item>
       <ion-label>Muy Importante</ion-label>
       <ion-radio color="danger" slot="start" value="Muy Importante"></ion-radio>
