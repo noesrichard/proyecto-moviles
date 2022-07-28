@@ -1,34 +1,41 @@
-<ion-item-sliding class="card">
-  <ion-item-options side="end">
-    <ion-item-option (click)="delete()" color="danger"
-      >Eliminar</ion-item-option
+<div class="card-container">
+  <ion-item-sliding class="sliding">
+    <ion-item-options side="end">
+      <ion-item-option (click)="delete()" color="danger">
+        <ion-icon name="trash-outline" size="large"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+
+    <ion-item
+      *ngIf="task"
+      [routerLink]="'/tasks/' + task.id"
+      [detail]="false"
+      class="card"
     >
-  </ion-item-options>
+      <div class="container">
+        <div class="info">
+          <ion-label class="ion-text-wrap">
+            <h2 class="title">{{ task.title }}</h2>
+            <h3>{{ task.subtitle }}</h3>
+          </ion-label>
+        </div>
+        <div class="details">
+          <ion-chip outline color="white">
+            <ion-icon name="calendar-number-outline" color="white"></ion-icon>
+            <ion-label>{{ task.deadline }}</ion-label>
+          </ion-chip>
 
-  <ion-item *ngIf="task" [routerLink]="'/tasks/' + task.id" [detail]="false">
-    <div class="container">
-      <div class="info">
-        <ion-label class="ion-text-wrap">
-          <h2 class="title"> {{ task.title }} </h2>
-          <h3>{{ task.subtitle }}</h3>
-        </ion-label>
+          <ion-chip [color]="priorityColor" outline>
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <ion-label>{{ task.priority }}</ion-label>
+          </ion-chip>
+          <br />
+          <ion-chip [color]="categoryColor" outline>
+            <ion-icon name="albums-outline"></ion-icon>
+            <ion-label>{{ task.category }}</ion-label>
+          </ion-chip>
+        </div>
       </div>
-      <div class="details">
-        <ion-chip  outline color="white">
-          <ion-icon name="calendar-number-outline" color="white"></ion-icon>
-          <ion-label>{{task.deadline}}</ion-label>
-        </ion-chip>
-
-        <ion-chip [color]="priorityColor" outline>
-          <ion-icon name="alert-circle-outline"></ion-icon>
-          <ion-label>{{task.priority}}</ion-label>
-        </ion-chip>
-        <br>
-        <ion-chip [color]="categoryColor" outline>
-          <ion-icon name="albums-outline" ></ion-icon>
-          <ion-label>{{task.category}}</ion-label>
-        </ion-chip>
-      </div>
-    </div>
-  </ion-item>
-</ion-item-sliding>
+    </ion-item>
+  </ion-item-sliding>
+</div>

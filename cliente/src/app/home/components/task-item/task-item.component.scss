@@ -1,15 +1,35 @@
+* {
+  box-sizing: border-box;
+}
 
+ion-icon{ 
+  font-size: 50;
+}
 
-.container{ 
-  display: grid; 
+.card-container {
+  background-color: #121212; 
+  padding: 10px;
+}
+
+.sliding{ 
+  border-radius: 20px;
+}
+
+.card {
+  border-radius: 20px;
+}
+
+.container {
+  padding: 10px 0 10px 0;
+  display: grid;
   grid-template-columns: 2fr 1fr;
   width: 100vw;
 }
 
-.details{ 
+.details {
   text-align: end;
 }
 
-.title{ 
-  font-weight: 100; 
+.title {
+  font-weight: 100;
 }
