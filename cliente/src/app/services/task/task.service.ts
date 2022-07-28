@@ -44,7 +44,14 @@ export class TaskService {
     return this.client.get(url, this.options);
   }
 
-  save(task: Task): Observable<any>{
+  save(task: Task): Observable<any>{ 
+    if(task.id){ 
+      return this.update(task)
+    }
+    return this.create(task)
+  }
+
+  create(task: Task): Observable<any>{
     return this.client.post(this.BASE_API_URL, task, this.options);
   }
 

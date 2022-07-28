@@ -1,18 +1,34 @@
-<ion-item-sliding>
+<ion-item-sliding class="card">
   <ion-item-options side="end">
-    <ion-item-option (click)="delete()" color="danger">Eliminar</ion-item-option>
+    <ion-item-option (click)="delete()" color="danger"
+      >Eliminar</ion-item-option
+    >
   </ion-item-options>
 
   <ion-item *ngIf="task" [routerLink]="'/tasks/' + task.id" [detail]="false">
-    <ion-label class="ion-text-wrap">
-      <h2>
-        {{ task.title }}
-        <span class="date">
-          <ion-note>{{ task.deadline }}</ion-note>
-          <ion-icon size="small"></ion-icon>
-        </span>
-      </h2>
-      <h3>{{ task.subtitle }}</h3>
-    </ion-label>
+    <div class="container">
+      <div class="info">
+        <ion-label class="ion-text-wrap">
+          <h2 class="title"> {{ task.title }} </h2>
+          <h3>{{ task.subtitle }}</h3>
+        </ion-label>
+      </div>
+      <div class="details">
+        <ion-chip  outline color="white">
+          <ion-icon name="calendar-number-outline" color="white"></ion-icon>
+          <ion-label>{{task.deadline}}</ion-label>
+        </ion-chip>
+
+        <ion-chip [color]="priorityColor" outline>
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-label>{{task.priority}}</ion-label>
+        </ion-chip>
+        <br>
+        <ion-chip [color]="categoryColor" outline>
+          <ion-icon name="albums-outline" ></ion-icon>
+          <ion-label>{{task.category}}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
   </ion-item>
 </ion-item-sliding>

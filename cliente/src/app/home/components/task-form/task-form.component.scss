@@ -1,0 +1,38 @@
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.input {
+  margin: 20px 27px 20px 27px;
+  border-radius: 20px;
+}
+
+.radio-group {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.right{ 
+  margin-left: 25px; 
+  margin-right: 10px; 
+}
+
+.left{ 
+  margin-left: 10px; 
+  margin-right: 25px; 
+}
+
+.priority-item {
+  margin: 0;
+  padding: 0;
+}
+
+.radios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
