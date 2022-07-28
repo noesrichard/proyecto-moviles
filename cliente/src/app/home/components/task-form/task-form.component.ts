@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {ToastController} from '@ionic/angular';
 import { Task, TaskService } from 'src/app/services/task/task.service';
 
 @Component({
@@ -14,15 +15,16 @@ export class TaskFormComponent implements OnInit {
     title: '',
     subtitle: '',
     deadline: '',
-    category: 'house',
-    priority: 'high',
+    category: 'Otros',
+    priority: 'Importante',
     workers: [],
   };
 
   private today: string = '2022-01-01';
   private dateString: string = ""
 
-  constructor(private service: TaskService, private router: Router) {}
+  constructor(private service: TaskService, private router: Router,
+             private toast: ToastController) {}
 
   ngOnInit() {
     if (!this.task.id) {
@@ -39,11 +41,27 @@ export class TaskFormComponent implements OnInit {
   }
 
   save() {
+    if(this.task.title === ""){ 
+      this.presentToast("El titulo no puede estar vacio") 
+      return;
+    }
+    if(this.task.subtitle === ""){ 
+      this.presentToast("El subtitulo no puede estar vacio") 
+      return;
+    }
     this.service.save(this.task).subscribe((res) => {
       console.log(res);
     });
     this.router.navigate(['tasks']);
   }
+  async presentToast(msg:string) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+  
 
   setTitle(event: CustomEvent) {
     this.task.title = event.detail.value;

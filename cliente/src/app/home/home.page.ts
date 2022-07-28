@@ -8,11 +8,16 @@ import { Task, TaskService } from '../services/task/task.service';
 })
 export class HomePage {
   private tasks: Task[];
+  private date: string; 
 
   constructor(private service: TaskService) {}
 
   ngOnInit() {
     this.getTasks();
+  }
+
+  ionViewDidEnter(){ 
+    this.getTasks(); 
   }
 
   getTasks() {
@@ -24,6 +29,7 @@ export class HomePage {
   refresh(ev) {
     setTimeout(() => {
       this.getTasks();
+      ev.detail.complete();
     }, 300);
   }
 }
