@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {Task, TaskService} from 'src/app/services/task/task.service';
 
 @Component({
@@ -13,6 +13,8 @@ export class TaskItemComponent implements OnInit {
   private priorityColor:string = "danger"; 
   private categoryColor: string = "success"; 
 
+  @Output() onDelete: EventEmitter<any> = new EventEmitter(); 
+
   constructor(private service: TaskService) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class TaskItemComponent implements OnInit {
     this.service.del(this.task.id).subscribe( res => {
       console.log(res)
     } );
+    this.onDelete.emit(true); 
   }
 
   getPriorityColor(task: Task){ 
